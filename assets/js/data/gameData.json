@@ -1,0 +1,79 @@
+[
+    {
+        "id": 1,
+        "text": "You wake up and hear voice: rise and shine mr freeman rise and shine not that i wish to imply you have been sleeping on the job no one is more deserving of a rest and all the effort in the world would have gone to waste until well lets just say your hour has come again the right man in the wrong place can make all the different",
+        "image": "assets/img/3screen.jpg",
+        "options": [
+            {
+                "text": "Keep listening",
+                "setState": {
+                    "blueGoo": true
+                },
+                "nextText": 2
+            },
+            {
+                "text": "Do nothing",
+                "nextText": 3,
+                "setState": {
+                    "blueGoo": false
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "text": "You appear in a train station...",
+        "options": [
+            {
+                "text": "Option A",
+                "requiredState": (currentState) => currentState.blueGoo,
+                "setState": {
+                    "blueGoo": false,
+                    "sword": true
+                },
+                "nextText": 3
+            },
+            {
+                "text": "Option B",
+                "requiredState": (currentState) => currentState.blueGoo,
+                "setState": {
+                    "blueGoo": false,
+                    "shield": true
+                },
+                "nextText": 3
+            },
+            {
+                "text": "Option C",
+                "nextText": 3
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "text": "You wake up in a train station in Eastern Europe...",
+        "options": [
+            {
+                "text": "Option 1",
+                "nextText": 4
+            },
+            {
+                "text": "Option 2",
+                "nextText": 5
+            },
+            {
+                "text": "Option 3",
+                "nextText": 6
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "text": "Restart from here",
+        "options": [
+            {
+                "text": "Restart",
+                "nextText": -1
+            }
+        ]
+    }
+]

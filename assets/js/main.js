@@ -19,7 +19,7 @@
 
 const textElement = document.getElementById('text');
 const optionButtonsElement = document.getElementById('option-buttons');
-// const imageScreen = document.getElementById('screen')
+
 
 let state = {}
 
@@ -27,21 +27,16 @@ function startGame() {
     state = {}
     showTextNode(1)
 }
-
+function playAudio(audioPath) {
+    var audio = new Audio(audioPath);
+    audio.play();
+}
 
 function showTextNode(textNodeIndex) {
     const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text;
 
 
-    // imageScreen.innerHTML = '';
-
-    // if (textNode.image) {
-    //     const imageElement = document.createElement('img');
-    //     imageElement.src = textNode.image;
-    //     imageElement.alt = 'screen game'; // Добавьте атрибут alt для изображения
-    //     imageScreen.appendChild(imageElement);
-    // }
 
     const screenElement = document.getElementById('preview');
 
@@ -49,7 +44,7 @@ function showTextNode(textNodeIndex) {
     screenElement.innerHTML = '';
 
     if (textNode.image) {
-        const imageElement = document.createElement('img');
+        let imageElement = document.createElement('img');
         imageElement.src = textNode.image;
         imageElement.alt = 'screen game';
         screenElement.appendChild(imageElement);
@@ -65,8 +60,13 @@ function showTextNode(textNodeIndex) {
             const button = document.createElement('button')
             button.innerText = option.text
             button.classList.add('btn')
-            button.addEventListener('click', () => selectOption(option))
-            optionButtonsElement.appendChild(button)
+            button.addEventListener('click', () => {
+                if (option.audio) {
+                    playAudio(option.audio);
+                }
+                selectOption(option);
+            });
+            optionButtonsElement.appendChild(button);
         }
     })
 }
@@ -89,70 +89,89 @@ const textNodes = [
     {
         id: 1,
         text: 'You wake up and hear voice: rise and shine mr freeman rise and shine not that i wish to imply you have been sleeping on the job no one is more deserving of a rest and all the effort in the world would have gone to waste until well lets just say your hour has come again the right man in the wrong place can make all the different',
-        image: "assets/img/3screen.jpg",
-        // sound play
+        image: "assets/img/1screen.jpg",
+        audio: 'assets/mp3/audio.mp3',
         options: [
             {
                 text: 'Keep listen',
-                setState: { blueGoo: true },
+                setState: { do: true },
                 nextText: 2
             },
-            // {
-            //     text: 'Leave the goo',
-            //     nextText: 2
-            // }
+            {
+                text: 'Nothing do',
+                setState: { do: false },
+                nextText: 2,
+
+            }
 
         ]
     },
     {
         id: 2,
-        text: 'You appear in train station  ',
+        text: 'You appear in train and see people in blue cloth.',
+        image: "assets/img/2screen.jpg",
         options: [
             {
-                text: '',
-                requiredState: (currentState) => currentState.blueGoo,
-                setState: { blueGoo: false, sword: true },
+                text: 'Exit from train',
+                // requiredState: (currentState) => currentState.do,
+                setState: { do: true},
                 nextText: 3
             },
             {
-                text: '',
-                requiredState: (currentState) => currentState.blueGoo,
-                setState: { blueGoo: false, shield: true },
-                nextText: 3
-            },
-            {
-                text: '',
+                text: 'Wait and watch',
+                // requiredState: (currentState) => currentState.do,
+
+                setState: { do: false},
                 nextText: 3
             }
         ]
     },
     {
         id: 3,
-        text: '',
+        text: 'You stay in inside train and nothing happend',
+        image: "assets/img/4screen.png",
         options: [
             {
-                text: '',
-                nextText: 4
-            },
-            {
-                text: '',
+                text: 'Exit train',
+                // requiredState: (currentState) => currentState.do,
                 nextText: 5
             },
             {
-                text: '',
+                text: 'Keep staying',
+                // requiredState: (currentState) => currentState.do,
+                nextText: 3
+            },
+        ]
+    },
+    
+    {
+        id: 5,
+        text: 'You see huge billboard ',
+        image: "assets/img/5screen.png",
+        options: [
+            {
+                text: 'Turn right',
                 nextText: 6
+            },
+            {
+                text: 'Turn left',
+                nextText: 7
             }
         ]
     },
     {
-        id: 4,
-        text: '',
+        id: 7,
+        text: 'You vortigon cleaning train station, you can collect garbage',
         options: [
             {
                 text: 'Restart',
-                nextText: -1
-            }
+                nextText: 5
+            },  
+             {
+                text: 'Restart',
+                nextText: 5
+            },
         ]
-    }
+    },
 ]
 startGame()
