@@ -1,0 +1,118 @@
+[
+    {
+        "id": 1,
+        "text": "You wake up and hear voice: rise and shine mr freeman rise and shine not that i wish to imply you have been sleeping on the job no one is more deserving of a rest and all the effort in the world would have gone to waste until well lets just say your hour has come again the right man in the wrong place can make all the different",
+        "image": "assets/img/1screen.jpg",
+        "options": [
+            {
+                "text": "Keep listen",
+                "nextText": 2
+            },
+            {
+                "text": "Nothing do",
+                "nextText": 2
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "text": "You appear in train and see people in blue cloth.",
+        "image": "assets/img/2screen.jpg",
+        "options": [
+            {
+                "text": "Exit from train",
+                "nextText": 3
+            },
+            {
+                "text": "Wait and watch",
+                "nextText": 3
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "text": "You stay in inside train and nothing happened",
+        "image": "assets/img/4screen.png",
+        "options": [
+            {
+                "text": "Exit train",
+                "nextText": 5
+            },
+            {
+                "text": "Keep staying",
+                "nextText": 3
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "text": "You see huge billboard ",
+        "image": "assets/img/5screen.png",
+        "options": [
+            {
+                "text": "Turn right",
+                "nextText": 8
+            },
+            {
+                "text": "Turn left",
+                "nextText": 7
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "text": "You see vortigon cleaning train station, you can collect jar, collect jar? ",
+        "image": "assets/img/6screen.png",
+        "options": [
+            {
+                "text": "Turn left and dont collect jar",
+                "nextText": 8
+            },
+            {
+                "text": "Turn left and collect jar",
+                "setState": {
+                    "garbageCollect": true
+                },
+                "nextText": 8
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "text": "You see combain officer with shoker, what are you do?",
+        "image": "",
+        "options": [
+            {
+                "text": "Pass him",
+                "nextText": 9
+            },
+            {
+                "text": "Throw jar to him",
+                "requiredState": true,
+                "setState": {
+                    "garbageCollect": false
+                },
+                "nextText": 9
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "text": "Yo",
+        "image": "assets/img/6screen.png",
+        "options": [
+            {
+                "text": "Pass him",
+                "nextText": 9
+            },
+            {
+                "text": "Test",
+                "requiredState": true,
+                "setState": {
+                    "garbageCollect": false
+                },
+                "nextText": 9
+            }
+        ]
+    }
+]
