@@ -5,16 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <h1>Hello World123</h1>
-    <% for (const item of storyData) {%>
+    <div class="container">
 
-        <h2>
-            <%= item.text %>
-        </h2>
-        <% } %>
+        <div id="text" class="text">
+            <button>
+                <%= storyItem.text %>
+            </button>
+        </div>
+
+        <% for (let option of storyItem.options) { %>
+            <div id="option-buttons" class="btn-grid">
+                <button onclick="window.location.href='/<%= option.nextText %>'">
+                    <%= option.text %>
+                </button>
+            </div>
+            <% } %>
+      
+    </div>
 </body>
+
+<script src="js/main.js"></script>
 
 </html>
