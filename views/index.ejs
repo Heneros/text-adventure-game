@@ -10,21 +10,30 @@
 
 <body>
     <div class="container">
-
+        <div id="preview" class="preview">
+            <img src="<%= storyItem.image %>" alt="">
+        </div>
         <div id="text" class="text">
-            <button>
-                <%= storyItem.text %>
-            </button>
+            <%= storyItem.text %>
+        </div>
+        <div id="option-buttons" class="btn-grid">
+            <% for (let option of storyItem.options) { %>
+                <% if (!option.requiredState || (option.requiredState && userChoices[option.requiredState])) { %>
+                    <button class="btn" onclick="window.location.href='/<%= option.nextText %>'">
+                        <%= option.text %>
+                    </button>
+                    <% } %>
+                        <% } %>
         </div>
 
-        <% for (let option of storyItem.options) { %>
-            <div id="option-buttons" class="btn-grid">
-                <button onclick="window.location.href='/<%= option.nextText %>'">
+        <!-- <div id="option-buttons" class="btn-grid">
+            <% for (let option of storyItem.options) { %>
+                <button class="btn" onclick="window.location.href='/<%= option.nextText %>'">
                     <%= option.text %>
                 </button>
-            </div>
-            <% } %>
-      
+                <% } %>
+        </div> -->
+
     </div>
 </body>
 

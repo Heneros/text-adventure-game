@@ -1,8 +1,11 @@
 const fs = require('fs')
 const express = require('express');
+const session = require('express-session');
 
 const app = express();
 
+let key = String(Math.random() * 1000);
+// console.log(key)
 
 
 app.use(express.static(__dirname + '/public'));
@@ -13,15 +16,25 @@ app.set('view engine', 'ejs');
 
 
 
-// app.get('/', (req, res) => {
-//     const data = JSON.parse(fs.readFileSync('./data/textQuest.json'))
-//     // storyData  <-- it's key
-//     res.render('index', { storyData: data });
-// });
+let data = JSON.parse(fs.readFileSync('./data/textQuest.json'));
 
+app.get("/", (req, res) => {
+    res.render('welcome')
+})
 
+let secretUnique = String(Math.trunc(Math.random() * 1000 ));
+console.log(secretUnique)
+app.use(session({
+    secret: secretUnique,
+    resave: true,
+    saveUninitialized: false
+}));
 
-let data = JSON.parse(fs.readFileSync('./data/textQuest.json'))
+app.use((req, res, next) => {
+    console.log('Session:', req.session);
+    next();
+});
+
 
 app.get('/:id', (req, res) => {
     let storyItem = data.find(item => item.id == req.params.id);
@@ -29,7 +42,22 @@ app.get('/:id', (req, res) => {
         res.status(404).send('Not found');
         return;
     }
-    res.render('index', { storyItem: storyItem });
+
+    req.session.userChoices = req.session.userChoices || {};
+
+    if (storyItem.options && storyItem.options.length > 0) {
+        storyItem.options.forEach(option => {
+            if (option.setState && Object.keys(option.setState).length > 0) {
+                Object.assign(req.session.userChoices, option.setState)
+            }
+        })
+    }
+
+
+    res.render('index', { storyItem, userChoices: req.session.userChoices });
+
+
+    // res.render('index', { storyItem: storyItem, userChoices: userChoices });
 });
 
 
