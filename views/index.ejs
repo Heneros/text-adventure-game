@@ -13,18 +13,53 @@
         <div id="preview" class="preview">
             <img src="<%= storyItem.image %>" alt="">
         </div>
+
         <div id="text" class="text">
             <%= storyItem.text %>
         </div>
         <div id="option-buttons" class="btn-grid">
-            <% for (let option of storyItem.options) { %>
-                <% if (!option.requiredState || (option.requiredState && userChoices[option.requiredState])) { %>
+            <% for (option of storyItem.options) { %>
+                <% if (!option.requiredState) { %>
+                    <button class="btn" onclick="window.location.href='/<%= option.nextText %>'">
+                        <%= option.text %>
+                    </button>
+                    <% } else if(userChoices[option.requiredState]===true ) { %>
+                        <button class="btn" onclick="window.location.href='/<%= option.nextText %>'">
+                            <%= option.text %>
+                        </button>
+                        <% } %>
+                            <% } %>
+        </div>
+
+
+        <!-- <% for (option of storyItem.options) { %>
+            <% if (!option.requiredState) { %>
+                <button class="btn" onclick="window.location.href='/<%= option.nextText %>'">
+                    <%= option.text %>
+                </button>
+                <% } else if(userChoices[option.requiredState]  ) { %>
                     <button class="btn" onclick="window.location.href='/<%= option.nextText %>'">
                         <%= option.text %>
                     </button>
                     <% } %>
-                        <% } %>
-        </div>
+                        <% } %> -->
+
+
+        <!-- <% for(option of storyItem.options){ %>
+                <% if(!option.requiredState || userChoices){ %>
+                    <button class="btn" onClick="window.location.href='/<%= option.nextText %>'">
+                        <%= option.text%>
+                    </button>
+                    <% }%>
+                        <% }%>  -->
+
+        <!-- <% for (let option of storyItem.options) { %>
+            <% if (!option.requiredState || (option.requiredState && userChoices[option.requiredState])) { %>
+                <button class="btn" onclick="window.location.href='/<%= option.nextText %>'">
+                    <%= option.text %>
+                </button>
+                <% } %>
+                    <% } %> -->
 
         <!-- <div id="option-buttons" class="btn-grid">
             <% for (let option of storyItem.options) { %>
