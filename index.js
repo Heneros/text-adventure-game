@@ -22,8 +22,8 @@ app.get("/", (req, res) => {
     res.render('welcome')
 })
 
-let secretUnique = String(Math.trunc(Math.random() * 1000));
-console.log(secretUnique)
+let secretUnique = toString(Math.trunc(Math.random() * 1000));
+// console.log(secretUnique)
 app.use(session({
     secret: secretUnique,
     resave: true,
@@ -42,30 +42,32 @@ app.get('/:id', (req, res) => {
         res.status(404).send('Not found');
         return;
     }
-
-    if (!req.session.userChoices) {
-        req.session.userChoices = {};
-    }
-
-    if (storyItem.options && storyItem.options.length > 0) {
-        storyItem.options.forEach(option => {
-            if (option.setState && Object.keys(option.setState).length > 0) {
-                for (const key in option.setState) {
-                    if (Object.prototype.hasOwnProperty.call(option.setState, key)) {
-                        req.session.userChoices[key] = req.session.userChoices[key] || option.setState[key];
-                    }
-                }
-            }
-        });
-    }
-
-
-
+    const hasSetStateOption = storyItem.options.some(option => option.setState !== undefined)
     res.locals.userChoices = req.session.userChoices || {};
+    if (hasSetStateOption) {
+        storyItem.options.forEach(option => {
+            res.locals.userChoices[option.text] = option.setState;
+        });
+    } else {
+        console.log(false);
+    }
+
+    
+
+
 
     res.render('index', { storyItem, userChoices: res.locals.userChoices });
 });
 
+app.get('/destroy', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/welcome');
+        }
+    })
+})
 
 const port = 4000;
 const start = async () => {

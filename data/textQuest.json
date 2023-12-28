@@ -61,18 +61,16 @@
     },
     {
         "id": 7,
-        "text": "You see vortigon cleaning train station, you can collect jar, collect jar? ",
+        "text": "You see vortigaunt cleaning train station, you can collect jar, collect jar? ",
         "image": "/img/6screen.png",
         "options": [
             {
-                "text": "Turn left and dont collect jar",
+                "text": "Turn left and don't collect jar",
                 "nextText": 8
             },
             {
                 "text": "Turn left and collect jar",
-                "setState": {
-                    "garbageCollect": true
-                },
+                "setState": true,
                 "nextText": 8
             }
         ]
@@ -89,9 +87,6 @@
             {
                 "text": "Throw jar to him",
                 "requiredState": true,
-                "setState": {
-                    "garbageCollect": false
-                },
                 "nextText": 9
             }
         ]
