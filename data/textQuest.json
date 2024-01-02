@@ -66,9 +66,9 @@
         "options": [
             {
                 "text": "Turn left and don't collect jar",
+                "setState": false,
                 "nextText": 8
-            },
-            {
+            },{
                 "text": "Turn left and collect jar",
                 "setState": true,
                 "nextText": 8

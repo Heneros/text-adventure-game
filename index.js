@@ -4,7 +4,7 @@ const session = require('express-session');
 
 const app = express();
 
-let key = String(Math.random() * 1000);
+// let key = String(Math.random() * 1000);
 // console.log(key)
 
 
@@ -22,18 +22,34 @@ app.get("/", (req, res) => {
     res.render('welcome')
 })
 
-let secretUnique = toString(Math.trunc(Math.random() * 1000));
+// let secretUnique = toString(Math.trunc(Math.random() * 1000));
 // console.log(secretUnique)
-app.use(session({
-    secret: secretUnique,
-    resave: true,
-    saveUninitialized: false
-}));
+// app.use(session({
+//     secret: secretUnique,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false }
+// }));
 
-app.use((req, res, next) => {
-    console.log('Session:', req.session);
-    next();
-});
+// app.get('/destroy', (req, res) => {
+//     req.session.destroy(err => {
+//         if (err) {
+//             console.error(err);
+//             res.status(500).send('Session destroy error');
+//         } else {
+//             res.redirect('/welcome');
+//         }
+//     });
+// });
+
+// app.get('*', function (req, res) {
+//     res.redirect('/');
+// });
+
+// app.use((req, res, next) => {
+//     console.log('Session:', req.session);
+//     next();
+// });
 
 
 app.get('/:id', (req, res) => {
@@ -42,32 +58,41 @@ app.get('/:id', (req, res) => {
         res.status(404).send('Not found');
         return;
     }
-    const hasSetStateOption = storyItem.options.some(option => option.setState !== undefined)
-    res.locals.userChoices = req.session.userChoices || {};
-    if (hasSetStateOption) {
-        storyItem.options.forEach(option => {
-            res.locals.userChoices[option.text] = option.setState;
-        });
-    } else {
-        console.log(false);
-    }
 
-    
+    // req.session.userChoices = req.session.userChoices || {};
+
+    // if (storyItem.options && storyItem.options.length > 0) {
+    //     storyItem.options.forEach(option => {
+    //         const setStateValue = option.setState;
+    //         // console.log(setStateValue)
+    //         if (setStateValue === true) {
+    //             req.session.userChoices['setState'] = true;
+    //         } 
+    //         else if (setStateValue === false) {
+    //             req.session.userChoices['setState'] = false;
+    //         }
+    //     })
+    // }
+    // if (storyItem.options && storyItem.options.length > 0) {
+    //     storyItem.options.forEach(option => {
+
+    //         // Set setState to the value from the option object
+    //         switch (option.setState) {
+    //             case true:
+    //                 req.session.userChoices['setState'] = true;
+    //                 break;
+    //             case false:
+    //                 req.session.userChoices['setState'] = false;
+    //                 break;
+    //         }
+    //     })
+    // }
 
 
 
-    res.render('index', { storyItem, userChoices: res.locals.userChoices });
+    res.render('index', { storyItem});
 });
 
-app.get('/destroy', (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/welcome');
-        }
-    })
-})
 
 const port = 4000;
 const start = async () => {
