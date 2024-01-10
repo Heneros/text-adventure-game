@@ -93,21 +93,7 @@
     },
     {
         "id": 9,
-        "text": "Yo",
-        "image": "/img/6screen.png",
-        "options": [
-            {
-                "text": "Pass him",
-                "nextText": 9
-            },
-            {
-                "text": "Test",
-                "requiredState": true,
-                "setState": {
-                    "garbageCollect": false
-                },
-                "nextText": 9
-            }
-        ]
+        "text": "Thank you for playing short game on NODE.JS + EJS + JSON.",
+        "image": "/img/6screen.png"
     }
 ]
