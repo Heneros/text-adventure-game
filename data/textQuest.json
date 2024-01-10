@@ -68,7 +68,8 @@
                 "text": "Turn left and don't collect jar",
                 "setState": false,
                 "nextText": 8
-            },{
+            },
+            {
                 "text": "Turn left and collect jar",
                 "setState": true,
                 "nextText": 8
@@ -77,8 +78,8 @@
     },
     {
         "id": 8,
-        "text": "You see combain officer with shoker, what are you do?",
-        "image": "",
+        "text": "You see combine officer with shoker, what are you gonna do?",
+        "image": "/img/7screen.png",
         "options": [
             {
                 "text": "Pass him",
@@ -93,7 +94,13 @@
     },
     {
         "id": 9,
-        "text": "Thank you for playing short game on NODE.JS + EJS + JSON.",
-        "image": "/img/6screen.png"
+        "text": "Thank you for playing short game on NODE.JS + EJS + JSON",
+        "image": "/img/6screen.png",
+        "options": [
+            {
+                "text": "Start again",
+                "nextText": 1
+            }
+        ]
     }
 ]
